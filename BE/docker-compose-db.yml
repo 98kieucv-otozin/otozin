@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:17-alpine
+    container_name: otozin_db_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: otozin
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: Kieucv121992644
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/init:/docker-entrypoint-initdb.d
+    networks:
+      - nestjs_network
+
+
+volumes:
+  postgres_data:
+
+networks:
+  nestjs_network:
+    driver: bridge 

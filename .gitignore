@@ -1,0 +1,149 @@
+# ============================================
+# Root .gitignore for Monorepo
+# ============================================
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# IDE and editor files
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.code-workspace
+
+# Environment variables (all projects)
+.env
+.env.local
+.env.*.local
+.env.development
+.env.test
+.env.production
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory
+coverage/
+*.lcov
+.nyc_output
+
+# Temporary folders
+tmp/
+temp/
+.tmp/
+
+# ============================================
+# Backend (BE) specific
+# ============================================
+BE/dist/
+BE/build/
+BE/.nest-cli.json
+BE/coverage/
+BE/*.tsbuildinfo
+
+# ============================================
+# CMS specific
+# ============================================
+CMS/dist/
+CMS/build/
+CMS/.vite/
+CMS/.cache/
+
+# ============================================
+# Frontend (FE) specific
+# ============================================
+FE/.next/
+FE/out/
+FE/.vercel/
+FE/next-env.d.ts
+FE/.pnp
+FE/.pnp.*
+
+# ============================================
+# Common - Node modules (all projects)
+# ============================================
+node_modules/
+.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# Package manager files
+# Note: Uncomment if you want to ignore lock files
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
+.npm
+.yarn-integrity
+
+# Build outputs
+dist/
+build/
+out/
+.cache/
+.parcel-cache/
+.rpt2_cache/
+.rts2_cache_cjs/
+.rts2_cache_es/
+.rts2_cache_umd/
+
+# TypeScript
+*.tsbuildinfo
+
+# Testing
+test-results/
+coverage/
+.nyc_output/
+
+# Docker
+docker-compose.override.yml
+.dockerignore
+
+# Database files
+*.sqlite
+*.sqlite3
+*.db
+
+# Optional eslint cache
+.eslintcache
+
+# Optional REPL history
+.node_repl_history
+
+# Output of 'npm pack'
+*.tgz
+
+# Storybook build outputs
+.storybook-out
+
+# Misc
+*.pem
+.cache/
+

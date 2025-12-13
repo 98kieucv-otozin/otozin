@@ -1,0 +1,27 @@
+{
+  "name": "MyApp - Modern Car Marketplace",
+  "short_name": "MyApp",
+  "description": "A modern, beautiful car marketplace built with Next.js and Tailwind CSS",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#FF2400",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ],
+  "categories": ["shopping", "automotive"],
+  "lang": "vi",
+  "dir": "ltr"
+} 
