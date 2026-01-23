@@ -11,7 +11,7 @@ export class UploadController {
 
   @Post('presigned-urls')
   @UseGuards(JwtAuthGuard, RoleGuard)
-  @Roles(UserRole.DEALER)
+  @Roles(UserRole.DEALER, UserRole.ADMIN)
   @HttpCode(HttpStatus.OK)
   async getUploadUrls(@Body() getUploadUrlDto: GetUploadUrlDto) {
     const results = await this.uploadService.getUploadUrls(
@@ -23,6 +23,7 @@ export class UploadController {
       success: true,
       uploadUrls: results.map((r) => r.url), // Presigned URLs để upload
       keys: results.map((r) => r.key), // File keys để FE biết file name sau khi upload
+      publicUrls: results.map((r) => r.publicUrl), // Public URLs để hiển thị ảnh
       count: results.length,
     };
   }

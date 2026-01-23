@@ -93,6 +93,7 @@ export async function getBestSellingEVs(limit = 10): Promise<Car[]> {
 
 /**
  * Get cars for sale with filters and pagination
+ * Note: Backend returns an array, so we wrap it in a paginated response format
  */
 export async function getCarsForSale(filters?: CarFilters): Promise<PaginatedResponse<Car>> {
     const params = new URLSearchParams();
@@ -116,9 +117,23 @@ export async function getCarsForSale(filters?: CarFilters): Promise<PaginatedRes
 
     const queryString = params.toString();
     const url = queryString
-        ? `${CARS_ENDPOINT}/for-sale?${queryString}`
-        : `${CARS_ENDPOINT}/for-sale`;
+        ? `/car-for-sale?${queryString}`
+        : `/car-for-sale`;
 
-    return apiGet<PaginatedResponse<Car>>(url);
+    // Backend returns an array or wrapped in ApiResponse, so we handle both cases
+    const response = await apiGet<any>(url);
+    // Handle both array response and ApiResponse wrapper
+    let cars: any[] = response.data.hits;
+
+
+    return {
+        data: cars || [],
+        pagination: {
+            page: filters?.page || 1,
+            limit: filters?.limit || cars?.length || 0,
+            total: cars?.length || 0,
+            totalPages: 1,
+        },
+    };
 }
 

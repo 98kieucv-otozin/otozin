@@ -35,12 +35,34 @@ export class CarForSaleController {
         @Query('sellerId') sellerId?: string,
         @Query('limit') limit?: string,
         @Query('offset') offset?: string,
+        @Query('page') page?: string,
+        @Query('perPage') perPage?: string,
     ) {
+        // Support both offset/limit and page/perPage for backward compatibility
+        // Priority: page/perPage > offset/limit
+        let finalLimit = 10;
+        let finalOffset = 0;
+
+        if (page && perPage) {
+            // Use page/perPage if both are provided
+            const pageNum = parseInt(page, 10);
+            const perPageNum = parseInt(perPage, 10);
+            finalLimit = perPageNum;
+            finalOffset = (pageNum - 1) * perPageNum;
+        } else if (limit) {
+            // Use limit/offset if provided
+            finalLimit = parseInt(limit, 10);
+            finalOffset = offset ? parseInt(offset, 10) : 0;
+        } else if (perPage) {
+            // Use perPage alone
+            finalLimit = parseInt(perPage, 10);
+        }
+
         return this.carForSaleService.findAll({
             status,
             sellerId: sellerId ? parseInt(sellerId, 10) : undefined,
-            limit: limit ? parseInt(limit, 10) : undefined,
-            offset: offset ? parseInt(offset, 10) : undefined,
+            limit: finalLimit,
+            offset: finalOffset,
         });
     }
 

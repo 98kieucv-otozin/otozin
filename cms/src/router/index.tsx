@@ -9,6 +9,7 @@ import Register from "../pages/Register.tsx";
 import ForgotPassword from "../pages/ForgotPassword.tsx";
 import Dashboard from "../pages/admin/Dashboard.tsx";
 import Cars from "../pages/admin/Cars.tsx";
+import CreatePost from "../pages/admin/CreatePost.tsx";
 
 import UploadCar from "../pages/dealer/UploadCar.tsx";
 import MyCars from "../pages/dealer/MyCars.tsx";
@@ -52,6 +53,7 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <Dashboard /> },
       { path: "cars", element: <Cars /> },
+      { path: "posts/create", element: <CreatePost /> },
     ],
   },
 ]);

@@ -48,12 +48,12 @@ export class UploadService {
   /**
    * Generate presigned URLs for R2 upload
    * Sử dụng AWS SDK S3 client để tạo presigned URLs trực tiếp
-   * 
+   *
    * Best Practice:
    * - Presigned URL không có extension (linh hoạt hơn)
    * - Extension được quyết định khi upload file thực tế
    * - File name format: {subfolder}/{uuid}
-   * 
+   *
    * R2_PUBLIC_URL: (Optional) Custom domain để truy cập public files
    * - Nếu không set: R2 tự động có public URL mặc định
    * - Nếu set: Dùng custom domain (ví dụ: https://cdn.yourdomain.com)
@@ -98,9 +98,23 @@ export class UploadService {
           expiresIn: 600, // 10 minutes
         });
 
+        // Construct public URL
+        let publicUrl = '';
+        if (this.publicUrl) {
+          // Use custom domain if configured
+          publicUrl = `${this.publicUrl}/${objectKey}`;
+        } else {
+          // Use R2 default public URL format
+          // Format: https://{accountId}.r2.cloudflarestorage.com/{bucketName}/{key}
+          const accountId = r2Config.accountId;
+          const bucketName = r2Config.bucketName;
+          publicUrl = `https://${accountId}.r2.cloudflarestorage.com/${bucketName}/${objectKey}`;
+        }
+
         results.push({
           url: presignedUrl,
           key: objectKey, // Return key để FE biết file name sau khi upload
+          publicUrl: publicUrl, // Return public URL để FE hiển thị ảnh
         });
       }
 

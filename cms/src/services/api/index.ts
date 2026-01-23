@@ -8,6 +8,7 @@ export { authApi } from "./endpoints/auth";
 export { carsApi } from "./endpoints/cars";
 export { usersApi } from "./endpoints/users";
 export { searchApi } from "./endpoints/search";
+export { uploadApi } from "./endpoints/upload";
 
 // Re-export for backward compatibility
 export { apiClient as api } from "./client";

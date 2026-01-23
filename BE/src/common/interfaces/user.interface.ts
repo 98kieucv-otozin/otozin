@@ -4,6 +4,7 @@ export enum UserRole {
   USER = 'USER',
   DEALER = 'DEALER',
   ADMIN = 'ADMIN',
+  CUSTOMER_SERVICE = 'CUSTOMER_SERVICE',
 }
 
 export interface User {
@@ -23,4 +24,4 @@ export interface UserPayload {
   role: UserRole;
   iat?: number;
   exp?: number;
-} 
+}

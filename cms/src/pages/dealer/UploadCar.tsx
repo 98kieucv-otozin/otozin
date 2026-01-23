@@ -7,6 +7,7 @@ import { PROVINCES } from "../../constants/provinces";
 import { CAR_COLORS } from "../../constants/carColors";
 import { UploadIcon, SearchIcon, CheckIcon } from "../../components/icons/Icons";
 import { searchApi, carsApi } from "../../services/api";
+import { extractUuidFromUrl } from "../../utils/url";
 import "./UploadCar.css";
 
 interface UploadCarProps {
@@ -218,15 +219,6 @@ export default function UploadCar({ carId, initialValues, onSuccess }: UploadCar
     }
   }, [fileList, coverImageUid]);
 
-  // Helper function để extract UUID từ URL
-  const extractUuidFromUrl = (url: string | File): string | File => {
-    if (typeof url !== "string") {
-      return url; // Nếu là File object, giữ nguyên
-    }
-    // Lấy phần cuối cùng sau dấu / cuối cùng
-    const parts = url.split("/");
-    return parts[parts.length - 1];
-  };
 
   // Xử lý submit form
   const handleSubmit = async (values: any) => {

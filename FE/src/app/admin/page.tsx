@@ -41,7 +41,7 @@ export default function AdminPage() {
   const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
 
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col">
+    <div className="min-h-screen bg-white flex flex-col">
       {/* Header */}
       <header className="w-full bg-white border-b border-gray-200 flex items-center px-4 py-2 justify-between sticky top-0 z-20">
         <div className="flex items-center gap-4">
@@ -194,4 +194,4 @@ export default function AdminPage() {
       </div>
     </div>
   );
-} 
+}

@@ -47,7 +47,19 @@ export class CarForSaleService {
         limit?: number;
         offset?: number;
     }) {
-        return this.repository.findAll(filters);
+        // Convert offset/limit to page/perPage for Typesense
+        const limit = filters?.limit || 10;
+        const offset = filters?.offset || 0;
+        const page = Math.floor(offset / limit) + 1;
+        const perPage = limit;
+
+        return this.typesenseSyncService.searchCarsForSale(
+            '*', // Search all
+            filters?.sellerId,
+            filters?.status,
+            page,
+            perPage,
+        );
     }
 
     /**
