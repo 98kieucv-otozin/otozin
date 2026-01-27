@@ -61,7 +61,7 @@ export class UploadService {
   async getUploadUrls(
     count: number,
     subfolder?: string,
-  ): Promise<Array<{ url: string; key: string }>> {
+  ): Promise<Array<{ url: string; key: string; publicUrl: string }>> {
     // Check if S3Client is initialized
     if (!this.s3Client || !this.bucketName) {
       throw new BadRequestException('R2 configuration is not complete. Please check your environment variables.');
@@ -78,7 +78,7 @@ export class UploadService {
     }
 
     const folder = subfolder || 'car-for-sale';
-    const results: Array<{ url: string; key: string }> = [];
+    const results: Array<{ url: string; key: string; publicUrl: string }> = [];
 
     try {
       for (let i = 0; i < count; i++) {

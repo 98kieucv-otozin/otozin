@@ -8,6 +8,7 @@ const ROLE_HIERARCHY: Record<UserRole, number> = {
   [UserRole.USER]: 1,
   [UserRole.DEALER]: 2,
   [UserRole.ADMIN]: 3,
+  [UserRole.CUSTOMER_SERVICE]: 2, // Same level as DEALER
 };
 
 function getRequiredRoleFromPath(path: string): UserRole | null {
