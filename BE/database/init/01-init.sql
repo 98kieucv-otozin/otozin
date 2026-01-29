@@ -119,57 +119,12 @@ CREATE TRIGGER update_models_updated_at
     EXECUTE FUNCTION update_updated_at_column();
 
 -- Create model_years table
--- Giữ các field cơ bản + một bộ thông số kỹ thuật ở mức model_year
--- (dùng trong trường hợp không có trims, hoặc làm default cho trims)
+-- Chỉ giữ các field cơ bản ở mức model_year.
+-- Mọi thông số kỹ thuật chi tiết đều được lưu ở bảng trims.
 CREATE TABLE IF NOT EXISTS model_years (
     id UUID PRIMARY KEY,
     model_id UUID NOT NULL,
     year INT NOT NULL,
-
-    -- Tiêu đề (dùng cho trường hợp không có trims, hoặc hiển thị tổng quan theo năm)
-    title VARCHAR(255),
-
-    -- Nhiên liệu
-    fuel VARCHAR(50),                        -- gasoline, diesel, electric, hybrid
-
-    -- Động cơ & truyền động
-    engine VARCHAR(100),
-    motor VARCHAR(100),
-    transmission VARCHAR(50),
-    drive VARCHAR(50),
-    power_hp INT,
-
-    -- Thông số kỹ thuật
-    body_type VARCHAR(50),
-    seats INT,
-
-    -- Nhiên liệu & Pin
-    fuel_consumption_l_100km DECIMAL(5,2),
-    battery_capacity_kWh DECIMAL(6,2),
-    range_km INT,
-    wh_per_km INT,
-
-    -- Hiệu suất
-    torque_Nm INT,
-    top_speed_kmh INT,
-    acceleration_0_100 DECIMAL(4,2),
-
-    -- Kích thước & Trọng lượng
-    length_mm INT,
-    width_mm INT,
-    height_mm INT,
-    wheelbase_mm INT,
-    weight_kg INT,
-    ground_clearance_mm INT,
-
-    -- Lốp & Mâm
-    rim_type VARCHAR(100),
-    tire_size VARCHAR(50),
-
-    -- Khác
-    trunk_volume_l INT,
-    airbags INT,
-
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     deleted_at TIMESTAMP
